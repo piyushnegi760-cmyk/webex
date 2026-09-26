@@ -1,0 +1,164 @@
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #050505;
+
+  animation: introExit 0.8s ease 2.4s forwards;
+}
+
+/* LOGO CONTAINER */
+
+.logo-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: logoReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+/* LOGO */
+
+.webex-logo {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(55px, 12vw, 150px);
+  font-weight: 900;
+
+  letter-spacing: 22px;
+
+  color: white;
+
+  opacity: 0;
+
+  transform: scale(0.65);
+
+  animation:
+    logoAppear 1.4s cubic-bezier(0.16, 1, 0.3, 1)
+    0.2s forwards,
+
+    logoGlow 1.5s ease
+    0.8s forwards;
+}
+
+/* GLOW BEHIND LOGO */
+
+.logo-glow {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  filter: blur(100px);
+
+  opacity: 0;
+
+  animation: glowAppear 1.5s ease 0.4s forwards;
+}
+
+/* LOGO REVEAL */
+
+@keyframes logoAppear {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(0.65)
+      translateY(30px);
+
+    letter-spacing: 35px;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      translateY(0);
+
+    letter-spacing: 8px;
+  }
+
+}
+
+/* SUBTLE GLOW */
+
+@keyframes logoGlow {
+
+  0% {
+    text-shadow:
+      0 0 0 rgba(255,255,255,0);
+  }
+
+  100% {
+    text-shadow:
+      0 0 15px rgba(255,255,255,0.35),
+      0 0 50px rgba(255,255,255,0.15);
+  }
+
+}
+
+/* BACKGROUND GLOW */
+
+@keyframes glowAppear {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  100% {
+    opacity: 0.12;
+    transform: scale(1.4);
+  }
+
+}
+
+/* WHOLE INTRO EXIT */
+
+@keyframes introExit {
+
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+  }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .webex-logo {
+    font-size: 55px;
+    letter-spacing: 10px;
+  }
+
+}
