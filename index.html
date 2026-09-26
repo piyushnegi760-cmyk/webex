@@ -2,14 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Webex — Digital Experiences</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <meta
     name="description"
     content="Webex creates modern, fast and professional websites for modern businesses."
   >
+
+  <meta
+    name="theme-color"
+    content="#050509"
+  >
+
+  <title>Webex — Modern Digital Experiences</title>
+
+  <!-- ================================
+       GOOGLE FONT
+  ================================= -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +32,20 @@
     rel="stylesheet"
   >
 
+  <!-- ================================
+       THREE.JS
+  ================================= -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"
+  ></script>
+
+
   <style>
+
+    /* ==================================================
+       GLOBAL
+    ================================================== */
 
     * {
       margin: 0;
@@ -34,18 +60,166 @@
     body {
       font-family: "Inter", sans-serif;
       background: #050509;
-      color: white;
+      color: #ffffff;
       overflow-x: hidden;
     }
 
-    /* =========================
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    ::selection {
+      background: #8d5cff;
+      color: #ffffff;
+    }
+
+
+    /* ==================================================
+       COMMON
+    ================================================== */
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    .section {
+      position: relative;
+      padding: 120px 0;
+      overflow: hidden;
+    }
+
+    .section-label {
+      display: inline-block;
+      color: #9f82ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(38px, 6vw, 76px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      font-weight: 800;
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(
+          90deg,
+          #8d5cff,
+          #00c2ff,
+          #ff4ecd
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-description {
+      max-width: 650px;
+      color: #858590;
+      line-height: 1.8;
+      font-size: 16px;
+      margin-top: 24px;
+    }
+
+    .center-heading {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 70px;
+    }
+
+
+    /* ==================================================
+       NAVBAR
+    ================================================== */
+
+    .navbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: min(1100px, 92%);
+
+      z-index: 100;
+
+      padding: 12px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+
+      background:
+        rgba(7,7,13,0.65);
+
+      backdrop-filter: blur(20px);
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 15px 50px rgba(0,0,0,0.25);
+    }
+
+    .nav-logo {
+      width: 88px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #a7a7b0;
+      font-size: 12px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-cta {
+      padding: 10px 15px;
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8d5cff,
+          #00aef5
+        ) !important;
+
+      color: #ffffff !important;
+    }
+
+
+    /* ==================================================
        HERO
-    ========================= */
+    ================================================== */
 
     .hero {
       position: relative;
       min-height: 100vh;
-      width: 100%;
       overflow: hidden;
 
       display: flex;
@@ -53,11 +227,7 @@
       justify-content: center;
     }
 
-    /* =========================
-       BACKGROUND
-    ========================= */
-
-    .background {
+    .hero-background {
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -65,23 +235,26 @@
       background:
         radial-gradient(
           circle at 20% 20%,
-          rgba(141, 92, 255, 0.20),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 80% 25%,
-          rgba(0, 194, 255, 0.16),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 50% 90%,
-          rgba(255, 78, 205, 0.14),
+          rgba(141,92,255,0.22),
           transparent 32%
         ),
+
+        radial-gradient(
+          circle at 80% 25%,
+          rgba(0,194,255,0.16),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 50% 90%,
+          rgba(255,78,205,0.13),
+          transparent 32%
+        ),
+
         #050509;
     }
 
-    .grid {
+    .hero-grid {
       position: absolute;
       inset: 0;
 
@@ -106,10 +279,6 @@
         );
     }
 
-    /* =========================
-       3D CANVAS
-    ========================= */
-
     #scene {
       position: absolute;
       inset: 0;
@@ -122,16 +291,11 @@
       pointer-events: none;
     }
 
-    /* =========================
-       CONTENT
-    ========================= */
-
     .hero-content {
       position: relative;
-
       z-index: 5;
 
-      width: min(1100px, 92%);
+      width: min(1050px, 92%);
 
       text-align: center;
 
@@ -139,24 +303,19 @@
       flex-direction: column;
       align-items: center;
 
-      padding-top: 20px;
+      padding-top: 50px;
     }
 
-    /* =========================
-       WEBEX LOGO
-    ========================= */
-
-    .logo {
+    .hero-logo {
       width: 175px;
       height: auto;
-
       object-fit: contain;
 
       margin-bottom: 30px;
 
       filter:
         drop-shadow(
-          0 0 12px rgba(141,92,255,0.65)
+          0 0 15px rgba(141,92,255,0.65)
         )
         drop-shadow(
           0 0 35px rgba(0,194,255,0.25)
@@ -166,76 +325,53 @@
     }
 
     @keyframes logoFloat {
-
-      0%, 100% {
+      0%,100% {
         transform: translateY(0);
       }
 
       50% {
         transform: translateY(-9px);
       }
-
     }
 
-    /* =========================
-       BADGE
-    ========================= */
-
-    .badge {
-
+    .hero-badge {
       padding: 9px 18px;
 
       border:
-        1px solid rgba(255,255,255,0.13);
+        1px solid rgba(255,255,255,0.12);
 
       background:
-        rgba(255,255,255,0.055);
+        rgba(255,255,255,0.05);
 
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(15px);
 
       border-radius: 100px;
 
-      font-size: 11px;
+      color: #ccccd4;
 
+      font-size: 10px;
       letter-spacing: 2px;
-
       text-transform: uppercase;
 
-      color: #d2d2d8;
-
       margin-bottom: 25px;
-
-      box-shadow:
-        0 0 30px rgba(141,92,255,0.08);
-
-      animation:
-        fadeUp 1s ease both;
     }
 
-    /* =========================
-       MAIN HEADING
-    ========================= */
-
     .hero-title {
+      font-size: clamp(45px, 8vw, 105px);
 
-      font-size:
-        clamp(45px, 8vw, 105px);
-
-      line-height: 0.95;
+      line-height: 0.94;
 
       font-weight: 800;
 
-      letter-spacing: -5px;
-
-      max-width: 1000px;
+      letter-spacing: -6px;
 
       background:
         linear-gradient(
           100deg,
-          #ffffff 10%,
-          #b99aff 40%,
-          #6bdcff 70%,
-          #ffffff 90%
+          #ffffff,
+          #b99aff,
+          #6bdcff,
+          #ffffff
         );
 
       background-size: 200% auto;
@@ -246,12 +382,11 @@
       color: transparent;
 
       animation:
-        titleReveal 1.2s ease forwards,
+        heroReveal 1.2s ease both,
         gradientMove 5s linear infinite;
     }
 
-    @keyframes titleReveal {
-
+    @keyframes heroReveal {
       from {
         opacity: 0;
         transform: translateY(35px);
@@ -261,40 +396,30 @@
         opacity: 1;
         transform: translateY(0);
       }
-
     }
 
     @keyframes gradientMove {
-
       to {
         background-position: 200% center;
       }
-
     }
 
-    /* =========================
-       SUBTITLE
-    ========================= */
-
-    .subtitle {
-
+    .hero-subtitle {
       max-width: 650px;
 
       margin-top: 30px;
 
-      font-size:
-        clamp(16px, 2vw, 20px);
+      color: #a7a7b0;
+
+      font-size: clamp(16px, 2vw, 20px);
 
       line-height: 1.7;
-
-      color: #a7a7b0;
 
       animation:
         fadeUp 1.2s ease 0.2s both;
     }
 
     @keyframes fadeUp {
-
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -304,33 +429,22 @@
         opacity: 1;
         transform: translateY(0);
       }
-
     }
 
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .buttons {
-
+    .hero-buttons {
       display: flex;
-
-      gap: 15px;
-
-      margin-top: 40px;
+      gap: 14px;
 
       flex-wrap: wrap;
-
       justify-content: center;
+
+      margin-top: 40px;
 
       animation:
         fadeUp 1.2s ease 0.4s both;
     }
 
     .btn {
-
-      position: relative;
-
       display: inline-flex;
 
       align-items: center;
@@ -338,29 +452,19 @@
 
       min-width: 175px;
 
-      padding: 16px 25px;
+      padding: 16px 24px;
 
       border-radius: 14px;
 
-      text-decoration: none;
-
-      font-size: 14px;
-
+      font-size: 13px;
       font-weight: 700;
-
-      letter-spacing: 0.5px;
 
       transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
     }
 
-    /* PRIMARY */
-
     .btn-primary {
-
-      color: white;
-
       background:
         linear-gradient(
           135deg,
@@ -370,111 +474,77 @@
         );
 
       box-shadow:
-        0 10px 40px
+        0 12px 40px
         rgba(91,124,255,0.30);
     }
 
     .btn-primary:hover {
-
       transform:
         translateY(-5px)
         scale(1.03);
 
       box-shadow:
-        0 15px 50px
-        rgba(91,124,255,0.50);
+        0 18px 55px
+        rgba(91,124,255,0.45);
     }
 
-    /* SECONDARY */
-
     .btn-secondary {
-
-      color: white;
-
       border:
-        1px solid
-        rgba(255,255,255,0.15);
+        1px solid rgba(255,255,255,0.15);
 
       background:
-        rgba(255,255,255,0.06);
+        rgba(255,255,255,0.05);
 
       backdrop-filter: blur(15px);
     }
 
     .btn-secondary:hover {
-
-      transform:
-        translateY(-5px);
+      transform: translateY(-5px);
 
       background:
-        rgba(255,255,255,0.10);
-
-      box-shadow:
-        0 10px 35px
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,0.09);
     }
 
-    /* =========================
-       TRUST
-    ========================= */
-
-    .trust {
-
-      margin-top: 30px;
-
-      font-size: 12px;
+    .hero-trust {
+      margin-top: 28px;
 
       color: #777783;
 
+      font-size: 11px;
       letter-spacing: 1px;
 
       animation:
         fadeUp 1.2s ease 0.6s both;
     }
 
-    .trust span {
-
-      margin: 0 8px;
-
+    .hero-trust span {
       color: #8d5cff;
+      margin: 0 7px;
     }
 
-    /* =========================
-       SCROLL
-    ========================= */
-
-    .scroll {
-
+    .scroll-indicator {
       position: absolute;
 
-      bottom: 25px;
-
+      bottom: 22px;
       left: 50%;
 
-      transform:
-        translateX(-50%);
+      transform: translateX(-50%);
 
       z-index: 5;
 
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      gap: 8px;
-
       color: #666673;
 
-      font-size: 10px;
-
+      font-size: 9px;
       letter-spacing: 3px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
     .scroll-line {
-
       width: 1px;
-
       height: 35px;
 
       background:
@@ -484,12 +554,10 @@
           #8d5cff
         );
 
-      animation:
-        scrollMove 2s infinite;
+      animation: scrollMove 2s infinite;
     }
 
     @keyframes scrollMove {
-
       0% {
         opacity: 0;
         transform: translateY(-8px);
@@ -503,16 +571,554 @@
         opacity: 0;
         transform: translateY(8px);
       }
-
     }
 
-    /* =========================
-       NEXT SECTION PLACEHOLDER
-    ========================= */
 
-    #work {
+    /* ==================================================
+       BENEFITS
+    ================================================== */
 
-      min-height: 40vh;
+    .benefits {
+      background:
+        radial-gradient(
+          circle at 15% 40%,
+          rgba(141,92,255,0.10),
+          transparent 30%
+        ),
+        #07070d;
+    }
+
+    .benefit-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 18px;
+    }
+
+    .benefit-card {
+      position: relative;
+
+      min-height: 320px;
+
+      padding: 30px;
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.07),
+          rgba(255,255,255,0.025)
+        );
+
+      backdrop-filter: blur(20px);
+
+      overflow: hidden;
+
+      transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+
+      transform-style: preserve-3d;
+    }
+
+    .benefit-card:hover {
+      transform:
+        translateY(-12px)
+        rotateX(3deg)
+        rotateY(-3deg);
+
+      border-color:
+        rgba(141,92,255,0.35);
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.35),
+        0 0 35px rgba(141,92,255,0.10);
+    }
+
+    .card-number {
+      position: absolute;
+
+      top: 22px;
+      right: 24px;
+
+      color: #555560;
+
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .card-icon {
+      width: 62px;
+      height: 62px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 18px;
+
+      background:
+        rgba(141,92,255,0.10);
+
+      border:
+        1px solid rgba(141,92,255,0.20);
+
+      font-size: 26px;
+
+      margin-bottom: 35px;
+
+      transition: 0.4s ease;
+    }
+
+    .benefit-card:hover .card-icon {
+      transform:
+        translateZ(30px)
+        rotate(-5deg)
+        scale(1.08);
+
+      box-shadow:
+        0 0 30px
+        rgba(141,92,255,0.20);
+    }
+
+    .benefit-card h3 {
+      font-size: 19px;
+      margin-bottom: 14px;
+    }
+
+    .benefit-card p {
+      color: #858590;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+    .card-glow {
+      position: absolute;
+
+      width: 160px;
+      height: 160px;
+
+      right: -80px;
+      bottom: -80px;
+
+      border-radius: 50%;
+
+      background: #8d5cff;
+
+      filter: blur(80px);
+
+      opacity: 0.12;
+
+      pointer-events: none;
+    }
+
+
+    /* ==================================================
+       SERVICES
+    ================================================== */
+
+    .services {
+      background: #050509;
+    }
+
+    .service-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+    }
+
+    .service-card {
+      position: relative;
+
+      min-height: 300px;
+
+      padding: 32px;
+
+      border-radius: 25px;
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.06),
+          rgba(255,255,255,0.015)
+        );
+
+      overflow: hidden;
+
+      transition:
+        transform 0.4s ease,
+        border-color 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform:
+        translateY(-10px);
+
+      border-color:
+        rgba(0,194,255,0.35);
+    }
+
+    .service-icon {
+      font-size: 38px;
+      margin-bottom: 35px;
+    }
+
+    .service-card h3 {
+      font-size: 21px;
+      margin-bottom: 13px;
+    }
+
+    .service-card p {
+      color: #858590;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .service-arrow {
+      position: absolute;
+
+      right: 28px;
+      bottom: 25px;
+
+      color: #777783;
+
+      font-size: 18px;
+    }
+
+
+    /* ==================================================
+       OUR WORK
+    ================================================== */
+
+    .work {
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255,78,205,0.08),
+          transparent 30%
+        ),
+        #07070d;
+    }
+
+    .work-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .work-card {
+      border:
+        1px solid rgba(255,255,255,0.09);
+
+      border-radius: 25px;
+
+      overflow: hidden;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      transition:
+        transform 0.4s ease,
+        border-color 0.4s ease;
+    }
+
+    .work-card:hover {
+      transform:
+        translateY(-10px);
+
+      border-color:
+        rgba(141,92,255,0.35);
+    }
+
+    .work-image {
+      height: 220px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(141,92,255,0.25),
+          transparent 55%
+        ),
+        #10101a;
+
+      font-size: 60px;
+    }
+
+    .work-content {
+      padding: 25px;
+    }
+
+    .work-tag {
+      color: #9f82ff;
+
+      font-size: 10px;
+
+      letter-spacing: 2px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+    }
+
+    .work-content h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .work-content p {
+      color: #858590;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      margin-bottom: 20px;
+    }
+
+    .demo-link {
+      color: #ffffff;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+    }
+
+
+    /* ==================================================
+       HOW IT WORKS
+    ================================================== */
+
+    .process {
+      background: #050509;
+    }
+
+    .process-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 20px;
+    }
+
+    .process-card {
+      text-align: center;
+
+      padding: 35px 22px;
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      border-radius: 24px;
+
+      background:
+        rgba(255,255,255,0.035);
+    }
+
+    .process-number {
+      width: 58px;
+      height: 58px;
+
+      margin: 0 auto 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8d5cff,
+          #00c2ff
+        );
+
+      font-size: 14px;
+      font-weight: 800;
+
+      box-shadow:
+        0 0 35px
+        rgba(141,92,255,0.20);
+    }
+
+    .process-card h3 {
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .process-card p {
+      color: #858590;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    /* ==================================================
+       PRICING
+    ================================================== */
+
+    .pricing {
+      background:
+        radial-gradient(
+          circle at 50% 30%,
+          rgba(141,92,255,0.10),
+          transparent 40%
+        ),
+        #07070d;
+    }
+
+    .pricing-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .price-card {
+      position: relative;
+
+      padding: 35px;
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      border-radius: 25px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      transition:
+        transform 0.4s ease,
+        border-color 0.4s ease;
+    }
+
+    .price-card:hover {
+      transform:
+        translateY(-10px);
+
+      border-color:
+        rgba(141,92,255,0.35);
+    }
+
+    .price-card.featured {
+      border-color:
+        rgba(141,92,255,0.45);
+
+      box-shadow:
+        0 0 60px
+        rgba(141,92,255,0.08);
+    }
+
+    .popular {
+      position: absolute;
+
+      top: 18px;
+      right: 18px;
+
+      padding: 7px 10px;
+
+      border-radius: 100px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8d5cff,
+          #00c2ff
+        );
+
+      font-size: 9px;
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+    }
+
+    .price-card h3 {
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      font-size: 48px;
+
+      font-weight: 800;
+
+      letter-spacing: -3px;
+
+      margin-bottom: 25px;
+    }
+
+    .price span {
+      color: #777783;
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .price-list {
+      list-style: none;
+
+      display: grid;
+
+      gap: 13px;
+
+      margin-bottom: 30px;
+    }
+
+    .price-list li {
+      color: #9a9aa4;
+      font-size: 13px;
+    }
+
+    .price-list li::before {
+      content: "✓";
+      color: #8d5cff;
+      margin-right: 10px;
+    }
+
+    .price-btn {
+      width: 100%;
+    }
+
+
+    /* ==================================================
+       3D WEBSITE PREVIEW
+    ================================================== */
+
+    .preview {
+      background: #050509;
+    }
+
+    .preview-area {
+      position: relative;
+
+      min-height: 550px;
 
       display: flex;
 
@@ -520,89 +1126,740 @@
 
       justify-content: center;
 
-      background: #07070d;
+      perspective: 1200px;
+    }
+
+    .laptop {
+      position: relative;
+
+      width: min(780px, 90%);
+
+      transform:
+        rotateX(8deg)
+        rotateY(-8deg);
+
+      transition:
+        transform 0.5s ease;
+
+      animation:
+        laptopFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes laptopFloat {
+      0%,100% {
+        transform:
+          rotateX(8deg)
+          rotateY(-8deg)
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          rotateX(5deg)
+          rotateY(-5deg)
+          translateY(-12px);
+      }
+    }
+
+    .laptop-screen {
+      position: relative;
+
+      aspect-ratio: 16 / 10;
+
+      border:
+        10px solid #15151e;
+
+      border-bottom-width: 16px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0d0d16,
+          #16102b
+        );
+
+      overflow: hidden;
+
+      box-shadow:
+        0 35px 80px
+        rgba(0,0,0,0.55),
+        0 0 70px
+        rgba(141,92,255,0.10);
+    }
+
+    .preview-ui {
+      position: absolute;
+      inset: 0;
+
+      padding: 25px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(0,194,255,0.18),
+          transparent 30%
+        );
+    }
+
+    .preview-nav {
+      height: 25px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 40px;
+    }
+
+    .preview-dot {
+      width: 35px;
+      height: 7px;
+
+      border-radius: 20px;
+
+      background: #8d5cff;
+    }
+
+    .preview-lines {
+      display: flex;
+      gap: 8px;
+    }
+
+    .preview-lines span {
+      width: 45px;
+      height: 5px;
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,0.15);
+    }
+
+    .preview-hero {
+      width: 55%;
+    }
+
+    .preview-hero h3 {
+      font-size: clamp(22px, 4vw, 42px);
+
+      line-height: 1;
+
+      margin-bottom: 15px;
+    }
+
+    .preview-hero p {
+      color: #777783;
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+    .preview-button {
+      display: inline-block;
+
+      margin-top: 20px;
+
+      padding: 9px 15px;
+
+      border-radius: 8px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8d5cff,
+          #00c2ff
+        );
+
+      font-size: 9px;
+    }
+
+    .laptop-base {
+      height: 20px;
+
+      width: 110%;
+
+      margin-left: -5%;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #24242d,
+          #0d0d13
+        );
+
+      border-radius:
+        0 0 25px 25px;
+
+      box-shadow:
+        0 15px 25px
+        rgba(0,0,0,0.5);
+    }
+
+
+    /* ==================================================
+       AI SECTION
+    ================================================== */
+
+    .ai {
+      background:
+        radial-gradient(
+          circle at 20% 50%,
+          rgba(0,194,255,0.10),
+          transparent 30%
+        ),
+        #07070d;
+    }
+
+    .ai-layout {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 70px;
+
+      align-items: center;
+    }
+
+    .ai-visual {
+      min-height: 450px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      position: relative;
+    }
+
+    .ai-orb {
+      width: 240px;
+      height: 240px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #ffffff,
+          #8d5cff 20%,
+          #32166e 55%,
+          #050509 75%
+        );
+
+      box-shadow:
+        0 0 50px
+        rgba(141,92,255,0.35),
+        0 0 120px
+        rgba(0,194,255,0.15);
+
+      animation:
+        orbFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat {
+      0%,100% {
+        transform: scale(1) translateY(0);
+      }
+
+      50% {
+        transform: scale(1.04) translateY(-12px);
+      }
+    }
+
+    .ai-ring {
+      position: absolute;
+
+      width: 340px;
+      height: 120px;
+
+      border:
+        1px solid
+        rgba(0,194,255,0.35);
+
+      border-radius: 50%;
+
+      transform:
+        rotate(-20deg);
+
+      animation:
+        ringRotate 6s linear infinite;
+    }
+
+    @keyframes ringRotate {
+      to {
+        transform:
+          rotate(340deg);
+      }
+    }
+
+    .ai-list {
+      display: grid;
+
+      gap: 15px;
+
+      margin-top: 35px;
+    }
+
+    .ai-item {
+      padding: 20px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,0.035);
+    }
+
+    .ai-item h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .ai-item p {
+      color: #858590;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+
+    /* ==================================================
+       FAQ
+    ================================================== */
+
+    .faq {
+      background: #050509;
+    }
+
+    .faq-list {
+      max-width: 850px;
+      margin: auto;
+
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      background:
+        rgba(255,255,255,0.035);
+    }
+
+    .faq-question {
+      width: 100%;
+
+      border: 0;
+      outline: 0;
+
+      background: transparent;
+
+      color: #ffffff;
+
+      padding: 22px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      cursor: pointer;
+
+      text-align: left;
+
+      font-family: inherit;
+
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .faq-plus {
+      font-size: 20px;
+      color: #9f82ff;
+
+      transition:
+        transform 0.3s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+
+      overflow: hidden;
+
+      transition:
+        max-height 0.4s ease;
+    }
+
+    .faq-answer p {
+      padding:
+        0 22px 22px;
+
+      color: #858590;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+    .faq-item.active
+    .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-item.active
+    .faq-plus {
+      transform: rotate(45deg);
+    }
+
+
+    /* ==================================================
+       FINAL CTA
+    ================================================== */
+
+    .cta {
+      position: relative;
+
+      padding: 130px 0;
 
       text-align: center;
 
-      padding: 50px;
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(141,92,255,0.18),
+          transparent 45%
+        ),
+        #07070d;
     }
 
-    #work h2 {
+    .cta-orb {
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%,-50%);
+
+      border-radius: 50%;
+
+      background:
+        rgba(141,92,255,0.10);
+
+      filter: blur(80px);
+
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta h2 {
+      max-width: 900px;
+
+      margin: auto;
 
       font-size:
-        clamp(30px, 6vw, 60px);
+        clamp(40px, 7vw, 85px);
+
+      line-height: 0.95;
+
+      letter-spacing: -4px;
+
+      font-weight: 800;
     }
 
-    #work p {
+    .cta p {
+      max-width: 600px;
 
+      margin: 25px auto 0;
+
+      color: #858590;
+
+      line-height: 1.8;
+    }
+
+    .cta .btn {
+      margin-top: 35px;
+    }
+
+
+    /* ==================================================
+       CONTACT
+    ================================================== */
+
+    .contact {
+      background: #050509;
+    }
+
+    .contact-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 25px;
+    }
+
+    .contact-card {
+      padding: 35px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.08);
+
+      border-radius: 24px;
+
+      background:
+        rgba(255,255,255,0.035);
+    }
+
+    .contact-card h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .contact-card p {
+      color: #858590;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+    .contact-link {
+      display: inline-block;
+
+      margin-top: 20px;
+
+      color: #a98cff;
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+
+    /* ==================================================
+       FOOTER
+    ================================================== */
+
+    footer {
+      padding: 40px 0;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.07);
+
+      background: #050509;
+    }
+
+    .footer-inner {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .footer-logo {
+      width: 90px;
+    }
+
+    .footer-text {
+      color: #666673;
+      font-size: 11px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-links a {
       color: #777783;
-
-      margin-top: 15px;
+      font-size: 11px;
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    .footer-links a:hover {
+      color: #ffffff;
+    }
 
-    @media (max-width: 600px) {
+
+    /* ==================================================
+       MOBILE
+    ================================================== */
+
+    @media (max-width: 1000px) {
+
+      .benefit-grid,
+      .process-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .service-grid,
+      .work-grid,
+      .pricing-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .ai-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .ai-visual {
+        min-height: 350px;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .navbar {
+        top: 10px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-logo {
+        width: 80px;
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .center-heading {
+        margin-bottom: 45px;
+      }
+
+      .section-title {
+        letter-spacing: -2px;
+      }
+
+      .benefit-grid,
+      .service-grid,
+      .work-grid,
+      .process-grid,
+      .pricing-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
 
       .hero {
         min-height: 100svh;
       }
 
-      .logo {
-
+      .hero-logo {
         width: 135px;
-
-        margin-bottom: 24px;
-      }
-
-      .badge {
-
-        font-size: 8px;
-
-        letter-spacing: 1.2px;
-
-        padding: 8px 13px;
       }
 
       .hero-title {
-
         letter-spacing: -2.5px;
       }
 
-      .subtitle {
-
+      .hero-subtitle {
         font-size: 15px;
-
-        line-height: 1.6;
-
-        max-width: 340px;
       }
 
-      .buttons {
-
+      .hero-buttons {
         width: 100%;
-
         flex-direction: column;
-
         align-items: center;
       }
 
       .btn {
-
-        width:
-          min(300px, 90%);
+        width: min(300px, 90%);
       }
 
-      .trust {
-
+      .hero-trust {
         font-size: 9px;
       }
 
-      .scroll {
+      .scroll-indicator {
+        bottom: 13px;
+      }
 
-        bottom: 15px;
+      .preview-area {
+        min-height: 380px;
+      }
+
+      .laptop {
+        width: 94%;
+      }
+
+      .laptop-screen {
+        border-width: 6px;
+        border-bottom-width: 10px;
+      }
+
+      .preview-ui {
+        padding: 13px;
+      }
+
+      .preview-nav {
+        margin-bottom: 20px;
+      }
+
+      .preview-lines span {
+        width: 25px;
+      }
+
+      .preview-hero {
+        width: 70%;
+      }
+
+      .ai-orb {
+        width: 180px;
+        height: 180px;
+      }
+
+      .ai-ring {
+        width: 260px;
+        height: 90px;
+      }
+
+      .cta {
+        padding: 100px 0;
+      }
+
+      .cta h2 {
+        letter-spacing: -2px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
       }
 
     }
@@ -610,31 +1867,73 @@
   </style>
 </head>
 
+
 <body>
 
-  <!-- =================================
-       STEP 1 — WEBEX HERO
-  ================================== -->
 
-  <section class="hero">
+  <!-- ==================================================
+       NAVIGATION
+  ================================================== -->
 
-    <div class="background">
-      <div class="grid"></div>
+  <nav class="navbar">
+
+    <a href="#home">
+      <img
+        src="./logo.png.PNG"
+        alt="Webex"
+        class="nav-logo"
+      >
+    </a>
+
+    <div class="nav-links">
+
+      <a href="#services">Services</a>
+
+      <a href="#work">Our Work</a>
+
+      <a href="#pricing">Pricing</a>
+
+      <a href="#faq">FAQ</a>
+
+      <a
+        href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20want%20a%20free%20website%20demo."
+        target="_blank"
+        rel="noopener"
+        class="nav-cta"
+      >
+        Get Demo
+      </a>
+
     </div>
 
-    <!-- 3D CANVAS -->
+  </nav>
+
+
+  <!-- ==================================================
+       STEP 1 — HERO
+  ================================================== -->
+
+  <section
+    class="hero"
+    id="home"
+  >
+
+    <div class="hero-background">
+      <div class="hero-grid"></div>
+    </div>
+
     <canvas id="scene"></canvas>
+
 
     <div class="hero-content">
 
-      <!-- YOUR WEBEX LOGO -->
       <img
         src="./logo.png.PNG"
         alt="Webex Logo"
-        class="logo"
+        class="hero-logo"
       >
 
-      <div class="badge">
+      <div class="hero-badge">
         DIGITAL EXPERIENCES • WEB DESIGN • AI
       </div>
 
@@ -643,24 +1942,22 @@
         DIGITAL EXPERIENCES.
       </h1>
 
-      <p class="subtitle">
+      <p class="hero-subtitle">
         Modern, fast & professional websites
         for modern businesses.
       </p>
 
-      <div class="buttons">
+      <div class="hero-buttons">
 
-        <!-- YOUR WHATSAPP -->
         <a
           href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20want%20a%20free%20website%20demo."
-          class="btn btn-primary"
           target="_blank"
           rel="noopener"
+          class="btn btn-primary"
         >
           GET FREE DEMO
         </a>
 
-        <!-- NEXT SECTION -->
         <a
           href="#work"
           class="btn btn-secondary"
@@ -670,23 +1967,18 @@
 
       </div>
 
-      <div class="trust">
-
+      <div class="hero-trust">
         Free Demo
         <span>•</span>
-
         Mobile First
         <span>•</span>
-
         Modern Design
-
       </div>
 
     </div>
 
-    <!-- SCROLL INDICATOR -->
 
-    <div class="scroll">
+    <div class="scroll-indicator">
 
       SCROLL
 
@@ -697,31 +1989,766 @@
   </section>
 
 
-  <!-- =================================
-       TEMPORARY SECTION
-       STEP 2 WILL REPLACE THIS
-  ================================== -->
+  <!-- ==================================================
+       STEP 2 — WHY WEBEX
+  ================================================== -->
 
-  <section id="work">
+  <section
+    class="section benefits"
+    id="benefits"
+  >
 
-    <div>
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          WHY WEBEX
+        </div>
+
+        <h2 class="section-title">
+          BUILT FOR THE
+          <span class="gradient-text">
+            MODERN WEB.
+          </span>
+        </h2>
+
+        <p class="section-description" style="margin-left:auto;margin-right:auto;">
+          Everything your business needs to create
+          a professional online presence.
+        </p>
+
+      </div>
+
+
+      <div class="benefit-grid">
+
+        <div class="benefit-card">
+
+          <div class="card-number">01</div>
+
+          <div class="card-icon">⚡</div>
+
+          <h3>FAST</h3>
+
+          <p>
+            Lightweight and fast-loading websites
+            designed for a smooth experience.
+          </p>
+
+          <div class="card-glow"></div>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+          <div class="card-number">02</div>
+
+          <div class="card-icon">📱</div>
+
+          <h3>MOBILE FIRST</h3>
+
+          <p>
+            Your website is designed to work
+            across phones, tablets and desktops.
+          </p>
+
+          <div class="card-glow"></div>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+          <div class="card-number">03</div>
+
+          <div class="card-icon">✨</div>
+
+          <h3>MODERN DESIGN</h3>
+
+          <p>
+            Premium interfaces with smooth
+            animations and clean layouts.
+          </p>
+
+          <div class="card-glow"></div>
+
+        </div>
+
+
+        <div class="benefit-card">
+
+          <div class="card-number">04</div>
+
+          <div class="card-icon">💬</div>
+
+          <h3>WHATSAPP READY</h3>
+
+          <p>
+            Customers can contact your business
+            directly through WhatsApp.
+          </p>
+
+          <div class="card-glow"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 3 — SERVICES
+  ================================================== -->
+
+  <section
+    class="section services"
+    id="services"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          WHAT WE DO
+        </div>
+
+        <h2 class="section-title">
+          OUR
+          <span class="gradient-text">
+            SERVICES.
+          </span>
+        </h2>
+
+        <p
+          class="section-description"
+          style="margin-left:auto;margin-right:auto;"
+        >
+          Digital solutions designed to help
+          businesses build a stronger online presence.
+        </p>
+
+      </div>
+
+
+      <div class="service-grid">
+
+
+        <div class="service-card">
+
+          <div class="service-icon">🌐</div>
+
+          <h3>
+            Business Websites
+          </h3>
+
+          <p>
+            Professional websites that clearly
+            present your business, services,
+            contact details and location.
+          </p>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <div class="service-icon">☕</div>
+
+          <h3>
+            Cafe & Restaurant
+          </h3>
+
+          <p>
+            Modern restaurant websites with
+            menus, galleries, location and
+            direct enquiry options.
+          </p>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <div class="service-icon">🏨</div>
+
+          <h3>
+            Hotel & Homestay
+          </h3>
+
+          <p>
+            Showcase rooms, facilities,
+            photos, location and booking
+            enquiries in one place.
+          </p>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <div class="service-icon">📄</div>
+
+          <h3>
+            Landing Pages
+          </h3>
+
+          <p>
+            Focused pages designed for
+            campaigns, products, services
+            and customer enquiries.
+          </p>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <div class="service-icon">💼</div>
+
+          <h3>
+            Portfolio Websites
+          </h3>
+
+          <p>
+            Present your work, skills,
+            projects and professional
+            identity with a modern design.
+          </p>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </div>
+
+
+        <div class="service-card">
+
+          <div class="service-icon">🤖</div>
+
+          <h3>
+            AI & Digital Solutions
+          </h3>
+
+          <p>
+            Explore AI-powered tools,
+            automation and smart digital
+            experiences for businesses.
+          </p>
+
+          <div class="service-arrow">
+            →
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 4 — OUR WORK
+  ================================================== -->
+
+  <section
+    class="section work"
+    id="work"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          PORTFOLIO
+        </div>
+
+        <h2 class="section-title">
+          OUR
+          <span class="gradient-text">
+            WORK.
+          </span>
+        </h2>
+
+        <p
+          class="section-description"
+          style="margin-left:auto;margin-right:auto;"
+        >
+          Demo concepts created by Webex
+          for different types of businesses.
+        </p>
+
+      </div>
+
+
+      <div class="work-grid">
+
+
+        <div class="work-card">
+
+          <div class="work-image">
+            ☕
+          </div>
+
+          <div class="work-content">
+
+            <div class="work-tag">
+              DEMO PROJECT
+            </div>
+
+            <h3>
+              Cafe Website
+            </h3>
+
+            <p>
+              A modern cafe website concept
+              featuring menu, gallery,
+              location and enquiry options.
+            </p>
+
+            <a
+              href="#contact"
+              class="demo-link"
+            >
+              VIEW DEMO →
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="work-card">
+
+          <div class="work-image">
+            🏨
+          </div>
+
+          <div class="work-content">
+
+            <div class="work-tag">
+              DEMO PROJECT
+            </div>
+
+            <h3>
+              Hotel & Stay
+            </h3>
+
+            <p>
+              A premium hotel website concept
+              with rooms, facilities,
+              photos and booking enquiries.
+            </p>
+
+            <a
+              href="#contact"
+              class="demo-link"
+            >
+              VIEW DEMO →
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div class="work-card">
+
+          <div class="work-image">
+            🏪
+          </div>
+
+          <div class="work-content">
+
+            <div class="work-tag">
+              DEMO PROJECT
+            </div>
+
+            <h3>
+              Local Business
+            </h3>
+
+            <p>
+              A clean business website concept
+              designed to make local businesses
+              easier to discover online.
+            </p>
+
+            <a
+              href="#contact"
+              class="demo-link"
+            >
+              VIEW DEMO →
+            </a>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 5 — HOW IT WORKS
+  ================================================== -->
+
+  <section
+    class="section process"
+    id="process"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          SIMPLE PROCESS
+        </div>
+
+        <h2 class="section-title">
+          FROM IDEA TO
+          <span class="gradient-text">
+            LAUNCH.
+          </span>
+        </h2>
+
+      </div>
+
+
+      <div class="process-grid">
+
+
+        <div class="process-card">
+
+          <div class="process-number">
+            01
+          </div>
+
+          <h3>
+            Tell Us
+          </h3>
+
+          <p>
+            Tell us about your business
+            and what you want on your website.
+          </p>
+
+        </div>
+
+
+        <div class="process-card">
+
+          <div class="process-number">
+            02
+          </div>
+
+          <h3>
+            Free Demo
+          </h3>
+
+          <p>
+            We create a website concept
+            so you can see the design first.
+          </p>
+
+        </div>
+
+
+        <div class="process-card">
+
+          <div class="process-number">
+            03
+          </div>
+
+          <h3>
+            Approve
+          </h3>
+
+          <p>
+            You review the design and
+            tell us what changes you want.
+          </p>
+
+        </div>
+
+
+        <div class="process-card">
+
+          <div class="process-number">
+            04
+          </div>
+
+          <h3>
+            Launch
+          </h3>
+
+          <p>
+            After approval, the website
+            is prepared for launch.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 6 — PRICING
+  ================================================== -->
+
+  <section
+    class="section pricing"
+    id="pricing"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          SIMPLE PRICING
+        </div>
+
+        <h2 class="section-title">
+          CHOOSE YOUR
+          <span class="gradient-text">
+            PLAN.
+          </span>
+        </h2>
+
+        <p
+          class="section-description"
+          style="margin-left:auto;margin-right:auto;"
+        >
+          Straightforward packages for different
+          website requirements.
+        </p>
+
+      </div>
+
+
+      <div class="pricing-grid">
+
+
+        <!-- BASIC -->
+
+        <div class="price-card">
+
+          <h3>
+            BASIC
+          </h3>
+
+          <div class="price">
+            ₹999
+          </div>
+
+          <ul class="price-list">
+
+            <li>
+              1-page website
+            </li>
+
+            <li>
+              Business information
+            </li>
+
+            <li>
+              Services / Menu
+            </li>
+
+            <li>
+              Photos
+            </li>
+
+            <li>
+              WhatsApp & Call
+            </li>
+
+            <li>
+              Google Maps
+            </li>
+
+            <li>
+              Mobile friendly
+            </li>
+
+          </ul>
+
+          <a
+            href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20am%20interested%20in%20the%20Basic%20website%20plan."
+            target="_blank"
+            rel="noopener"
+            class="btn btn-secondary price-btn"
+          >
+            GET STARTED
+          </a>
+
+        </div>
+
+
+        <!-- STANDARD -->
+
+        <div class="price-card featured">
+
+          <div class="popular">
+            POPULAR
+          </div>
+
+          <h3>
+            STANDARD
+          </h3>
+
+          <div class="price">
+            ₹1,999
+          </div>
+
+          <ul class="price-list">
+
+            <li>
+              Up to 5 pages
+            </li>
+
+            <li>
+              Gallery
+            </li>
+
+            <li>
+              Services / Menu
+            </li>
+
+            <li>
+              WhatsApp & Call
+            </li>
+
+            <li>
+              Google Maps
+            </li>
+
+            <li>
+              Contact form
+            </li>
+
+            <li>
+              Basic SEO
+            </li>
+
+          </ul>
+
+          <a
+            href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20am%20interested%20in%20the%20Standard%20website%20plan."
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary price-btn"
+          >
+            GET STARTED
+          </a>
+
+        </div>
+
+
+        <!-- PREMIUM -->
+
+        <div class="price-card">
+
+          <h3>
+            PREMIUM
+          </h3>
+
+          <div class="price">
+            ₹2,999
+          </div>
+
+          <ul class="price-list">
+
+            <li>
+              5+ pages
+            </li>
+
+            <li>
+              Premium custom design
+            </li>
+
+            <li>
+              Smooth animations
+            </li>
+
+            <li>
+              Gallery
+            </li>
+
+            <li>
+              Enquiry system
+            </li>
+
+            <li>
+              WhatsApp integration
+            </li>
+
+            <li>
+              Basic SEO
+            </li>
+
+          </ul>
+
+          <a
+            href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20am%20interested%20in%20the%20Premium%20website%20plan."
+            target="_blank"
+            rel="noopener"
+            class="btn btn-secondary price-btn"
+          >
+            GET STARTED
+          </a>
+
+        </div>
+
+
+      </div>
 
       <p
         style="
-          color:#8d5cff;
-          letter-spacing:3px;
-          font-size:12px;
+          text-align:center;
+          color:#666673;
+          font-size:11px;
+          margin-top:25px;
         "
       >
-        NEXT SECTION
-      </p>
-
-      <h2>
-        OUR WORK
-      </h2>
-
-      <p>
-        Step 2 mein premium animated portfolio section banega.
+        Domain and hosting costs, if required, are separate.
       </p>
 
     </div>
@@ -729,23 +2756,564 @@
   </section>
 
 
-  <!-- =================================
-       THREE.JS
-  ================================== -->
+  <!-- ==================================================
+       STEP 7 — 3D WEBSITE PREVIEW
+  ================================================== -->
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <section
+    class="section preview"
+    id="preview"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          THE EXPERIENCE
+        </div>
+
+        <h2 class="section-title">
+          YOUR WEBSITE,
+          <span class="gradient-text">
+            REIMAGINED.
+          </span>
+        </h2>
+
+        <p
+          class="section-description"
+          style="margin-left:auto;margin-right:auto;"
+        >
+          Modern layouts, responsive design and
+          interactive experiences built around your business.
+        </p>
+
+      </div>
+
+
+      <div class="preview-area">
+
+        <div class="laptop">
+
+          <div class="laptop-screen">
+
+            <div class="preview-ui">
+
+              <div class="preview-nav">
+
+                <div class="preview-dot"></div>
+
+                <div class="preview-lines">
+
+                  <span></span>
+                  <span></span>
+                  <span></span>
+
+                </div>
+
+              </div>
+
+
+              <div class="preview-hero">
+
+                <h3>
+                  YOUR BUSINESS
+                  DESERVES BETTER.
+                </h3>
+
+                <p>
+                  A modern digital experience
+                  designed around your business.
+                </p>
+
+                <div class="preview-button">
+                  EXPLORE
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="laptop-base"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 8 — AI SOLUTIONS
+  ================================================== -->
+
+  <section
+    class="section ai"
+    id="ai"
+  >
+
+    <div class="container">
+
+      <div class="ai-layout">
+
+
+        <div class="ai-visual">
+
+          <div class="ai-orb"></div>
+
+          <div class="ai-ring"></div>
+
+        </div>
+
+
+        <div>
+
+          <div class="section-label">
+            FUTURE READY
+          </div>
+
+          <h2 class="section-title">
+            WEB + 
+            <span class="gradient-text">
+              AI.
+            </span>
+          </h2>
+
+          <p class="section-description">
+            Webex can explore AI-powered features
+            and smart digital experiences for businesses.
+          </p>
+
+
+          <div class="ai-list">
+
+
+            <div class="ai-item">
+
+              <h3>
+                🤖 AI Assistants
+              </h3>
+
+              <p>
+                AI-powered customer assistance
+                can help businesses handle common
+                enquiries.
+              </p>
+
+            </div>
+
+
+            <div class="ai-item">
+
+              <h3>
+                ⚙️ Automation
+              </h3>
+
+              <p>
+                Connect digital workflows and
+                automate repetitive business tasks.
+              </p>
+
+            </div>
+
+
+            <div class="ai-item">
+
+              <h3>
+                💡 Smart Experiences
+              </h3>
+
+              <p>
+                Build interactive experiences
+                around real business requirements.
+              </p>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 9 — FAQ
+  ================================================== -->
+
+  <section
+    class="section faq"
+    id="faq"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          QUESTIONS
+        </div>
+
+        <h2 class="section-title">
+          FREQUENTLY
+          <span class="gradient-text">
+            ASKED.
+          </span>
+        </h2>
+
+      </div>
+
+
+      <div class="faq-list">
+
+
+        <div class="faq-item">
+
+          <button
+            class="faq-question"
+            type="button"
+          >
+
+            <span>
+              Can I see a demo before proceeding?
+            </span>
+
+            <span class="faq-plus">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <p>
+              Yes. Webex can create a free demo
+              concept so you can see the proposed
+              design before deciding to proceed.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <button
+            class="faq-question"
+            type="button"
+          >
+
+            <span>
+              Can my website work on mobile?
+            </span>
+
+            <span class="faq-plus">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <p>
+              Yes. The website is designed to be
+              responsive across mobile, tablet and
+              desktop screen sizes.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <button
+            class="faq-question"
+            type="button"
+          >
+
+            <span>
+              Can customers contact my business on WhatsApp?
+            </span>
+
+            <span class="faq-plus">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <p>
+              Yes. WhatsApp buttons can be connected
+              directly to your business number.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <button
+            class="faq-question"
+            type="button"
+          >
+
+            <span>
+              Is domain and hosting included?
+            </span>
+
+            <span class="faq-plus">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <p>
+              Domain and hosting are separate costs
+              when required. The client should ideally
+              own their domain and hosting account.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="faq-item">
+
+          <button
+            class="faq-question"
+            type="button"
+          >
+
+            <span>
+              Can the website be customized?
+            </span>
+
+            <span class="faq-plus">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <p>
+              Yes. Content, images, colors, sections,
+              features and design can be customized
+              according to the business.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       STEP 10 — FINAL CTA
+  ================================================== -->
+
+  <section class="cta">
+
+    <div class="cta-orb"></div>
+
+    <div class="container cta-content">
+
+      <div class="section-label">
+        READY TO GO ONLINE?
+      </div>
+
+      <h2>
+        YOUR BUSINESS
+        <span class="gradient-text">
+          DESERVES A BETTER WEBSITE.
+        </span>
+      </h2>
+
+      <p>
+        Tell us about your business and
+        get a free website demo concept.
+      </p>
+
+      <a
+        href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20want%20a%20free%20website%20demo%20for%20my%20business."
+        target="_blank"
+        rel="noopener"
+        class="btn btn-primary"
+      >
+        GET FREE DEMO
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       CONTACT
+  ================================================== -->
+
+  <section
+    class="section contact"
+    id="contact"
+  >
+
+    <div class="container">
+
+      <div class="center-heading">
+
+        <div class="section-label">
+          CONTACT WEBEX
+        </div>
+
+        <h2 class="section-title">
+          LET'S BUILD
+          <span class="gradient-text">
+            TOGETHER.
+          </span>
+        </h2>
+
+      </div>
+
+
+      <div class="contact-grid">
+
+
+        <div class="contact-card">
+
+          <h3>
+            💬 WhatsApp
+          </h3>
+
+          <p>
+            Talk to Webex directly on WhatsApp
+            for your website requirement.
+          </p>
+
+          <a
+            href="https://wa.me/919762463324?text=Hi%20Webex%2C%20I%20want%20to%20discuss%20a%20website."
+            target="_blank"
+            rel="noopener"
+            class="contact-link"
+          >
+            +91 97624 63324 →
+          </a>
+
+        </div>
+
+
+        <div class="contact-card">
+
+          <h3>
+            📍 Location
+          </h3>
+
+          <p>
+            Webex is based in Dehradun,
+            Uttarakhand, with a vision to
+            serve businesses across India.
+          </p>
+
+          <a
+            href="#home"
+            class="contact-link"
+          >
+            DEHRADUN → INDIA
+          </a>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ==================================================
+       FOOTER
+  ================================================== -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <img
+        src="./logo.png.PNG"
+        alt="Webex"
+        class="footer-logo"
+      >
+
+      <div class="footer-text">
+        © 2026 Webex. All rights reserved.
+      </div>
+
+      <div class="footer-links">
+
+        <a href="#home">
+          Home
+        </a>
+
+        <a href="#services">
+          Services
+        </a>
+
+        <a href="#pricing">
+          Pricing
+        </a>
+
+        <a href="#contact">
+          Contact
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- ==================================================
+       JAVASCRIPT
+  ================================================== -->
 
   <script>
 
-    /* =========================
-       THREE.JS SETUP
-    ========================= */
+    /* ==================================================
+       THREE.JS 3D HERO
+    ================================================== */
 
     const canvas =
       document.getElementById("scene");
 
     const scene =
       new THREE.Scene();
+
 
     const camera =
       new THREE.PerspectiveCamera(
@@ -785,9 +3353,7 @@
     );
 
 
-    /* =========================
-       LIGHTS
-    ========================= */
+    /* LIGHT */
 
     const ambientLight =
       new THREE.AmbientLight(
@@ -800,36 +3366,34 @@
     );
 
 
-    const purpleLight =
+    const pointLight =
       new THREE.PointLight(
         0x8d5cff,
         20,
         20
       );
 
-    purpleLight.position.set(
+    pointLight.position.set(
       2,
       2,
       4
     );
 
     scene.add(
-      purpleLight
+      pointLight
     );
 
 
-    /* =========================
-       3D CORE
-    ========================= */
+    /* 3D CORE */
 
-    const geometry =
+    const coreGeometry =
       new THREE.IcosahedronGeometry(
         1.25,
         2
       );
 
 
-    const material =
+    const coreMaterial =
       new THREE.MeshPhysicalMaterial({
 
         color: 0x7b5cff,
@@ -853,17 +3417,14 @@
 
     const core =
       new THREE.Mesh(
-        geometry,
-        material
+        coreGeometry,
+        coreMaterial
       );
-
 
     scene.add(core);
 
 
-    /* =========================
-       OUTER RING 1
-    ========================= */
+    /* RING 1 */
 
     const ringGeometry =
       new THREE.TorusGeometry(
@@ -874,69 +3435,57 @@
       );
 
 
-    const ring1Material =
-      new THREE.MeshBasicMaterial({
-
-        color: 0x00c2ff,
-
-        transparent: true,
-
-        opacity: 0.7
-
-      });
-
-
     const ring1 =
       new THREE.Mesh(
+
         ringGeometry,
-        ring1Material
+
+        new THREE.MeshBasicMaterial({
+
+          color: 0x00c2ff,
+
+          transparent: true,
+
+          opacity: 0.7
+
+        })
+
       );
 
 
     ring1.rotation.x =
       Math.PI / 2.5;
 
-
-    scene.add(
-      ring1
-    );
+    scene.add(ring1);
 
 
-    /* =========================
-       OUTER RING 2
-    ========================= */
-
-    const ring2Material =
-      new THREE.MeshBasicMaterial({
-
-        color: 0xff4ecd,
-
-        transparent: true,
-
-        opacity: 0.55
-
-      });
-
+    /* RING 2 */
 
     const ring2 =
       new THREE.Mesh(
+
         ringGeometry,
-        ring2Material
+
+        new THREE.MeshBasicMaterial({
+
+          color: 0xff4ecd,
+
+          transparent: true,
+
+          opacity: 0.55
+
+        })
+
       );
 
 
     ring2.rotation.y =
       Math.PI / 2.5;
 
-
-    scene.add(
-      ring2
-    );
+    scene.add(ring2);
 
 
-    /* =========================
-       PARTICLES
-    ========================= */
+    /* PARTICLES */
 
     const particleCount = 900;
 
@@ -969,11 +3518,14 @@
 
 
     particleGeometry.setAttribute(
+
       "position",
+
       new THREE.BufferAttribute(
         positions,
         3
       )
+
     );
 
 
@@ -993,28 +3545,26 @@
 
     const particles =
       new THREE.Points(
+
         particleGeometry,
+
         particleMaterial
+
       );
 
 
-    scene.add(
-      particles
-    );
+    scene.add(particles);
 
 
-    /* =========================
-       MOUSE
-    ========================= */
+    /* MOUSE */
 
     let mouseX = 0;
-
     let mouseY = 0;
 
 
     window.addEventListener(
       "mousemove",
-      (event) => {
+      function(event) {
 
         mouseX =
           (
@@ -1035,26 +3585,22 @@
     );
 
 
-    /* =========================
-       ANIMATION
-    ========================= */
+    /* ANIMATION */
 
     const clock =
       new THREE.Clock();
 
 
-    function animate() {
+    function animate3D() {
 
       requestAnimationFrame(
-        animate
+        animate3D
       );
 
 
       const time =
         clock.getElapsedTime();
 
-
-      /* CORE */
 
       core.rotation.x =
         time * 0.18 +
@@ -1066,8 +3612,6 @@
         mouseX * 0.20;
 
 
-      /* RING 1 */
-
       ring1.rotation.z =
         time * 0.25;
 
@@ -1076,8 +3620,6 @@
         Math.PI / 2.5 +
         mouseY * 0.15;
 
-
-      /* RING 2 */
 
       ring2.rotation.z =
         -time * 0.18;
@@ -1088,8 +3630,6 @@
         mouseX * 0.15;
 
 
-      /* PARTICLES */
-
       particles.rotation.y =
         time * 0.015;
 
@@ -1097,8 +3637,6 @@
       particles.rotation.x =
         mouseY * 0.03;
 
-
-      /* CAMERA */
 
       camera.position.x +=
         (
@@ -1129,16 +3667,14 @@
     }
 
 
-    animate();
+    animate3D();
 
 
-    /* =========================
-       RESIZE
-    ========================= */
+    /* RESIZE */
 
     window.addEventListener(
       "resize",
-      () => {
+      function() {
 
         camera.aspect =
           window.innerWidth /
@@ -1151,6 +3687,141 @@
         renderer.setSize(
           window.innerWidth,
           window.innerHeight
+        );
+
+      }
+    );
+
+
+    /* ==================================================
+       FAQ
+    ================================================== */
+
+    const faqItems =
+      document.querySelectorAll(
+        ".faq-item"
+      );
+
+
+    faqItems.forEach(
+      function(item) {
+
+        const button =
+          item.querySelector(
+            ".faq-question"
+          );
+
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            const wasActive =
+              item.classList.contains(
+                "active"
+              );
+
+
+            faqItems.forEach(
+              function(otherItem) {
+
+                otherItem.classList.remove(
+                  "active"
+                );
+
+              }
+            );
+
+
+            if (!wasActive) {
+
+              item.classList.add(
+                "active"
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    /* ==================================================
+       SIMPLE CARD TILT
+    ================================================== */
+
+    const tiltCards =
+      document.querySelectorAll(
+        ".benefit-card, .service-card, .price-card"
+      );
+
+
+    tiltCards.forEach(
+      function(card) {
+
+        card.addEventListener(
+          "mousemove",
+          function(event) {
+
+            if (
+              window.innerWidth < 700
+            ) {
+              return;
+            }
+
+
+            const rect =
+              card.getBoundingClientRect();
+
+
+            const x =
+              event.clientX -
+              rect.left;
+
+
+            const y =
+              event.clientY -
+              rect.top;
+
+
+            const centerX =
+              rect.width / 2;
+
+
+            const centerY =
+              rect.height / 2;
+
+
+            const rotateX =
+              (y - centerY) /
+              30;
+
+
+            const rotateY =
+              (centerX - x) /
+              30;
+
+
+            card.style.transform =
+              `
+              translateY(-8px)
+              rotateX(${rotateX}deg)
+              rotateY(${rotateY}deg)
+              `;
+          }
+        );
+
+
+        card.addEventListener(
+          "mouseleave",
+          function() {
+
+            card.style.transform =
+              "";
+
+          }
         );
 
       }
